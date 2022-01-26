@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--    普通实例化-->
+    <!--    <bean id="userDao" class="it.com.dao.impl.UserDaoImpl"/>-->
+    <!--    静态工厂实例化-->
+    <!--        <bean id="userDao" class="it.com.factory.StaticFactory" factory-method="getUserDaoFactory"/>-->
+    <!-- 非静态工厂实例化 -->
+    <!--    <bean id="factory" class="it.com.factory.NoStaticFactory"/>-->
+    <!--    <bean id="userDao" factory-bean="factory" factory-method="getUserDao"/>-->
+    <!--bean的依赖注入-->
+    <!--有参构造注入-->
+    <!--    <bean id="userDao" class="it.com.dao.impl.UserDaoImpl"/>-->
+    <!--    <bean id="userService" class="it.com.service.impl.UserServiceImpl">-->
+    <!--        <constructor-arg name="userDao" ref="userDao"></constructor-arg>-->
+    <!--    </bean>-->
+    <!--    set注入-->
+    <!--    <bean id="userDao" class="it.com.dao.impl.UserDaoImpl"/>-->
+    <!--    <bean id="userService" class="it.com.service.impl.UserServiceImpl">-->
+    <!--        <property name="userDao" ref="userDao"></property>-->
+    <!--    </bean>-->
+    <!--    set注入 p:简写-->
+    <!--    <bean id="userDao" class="it.com.dao.impl.UserDaoImpl"/>-->
+    <!--    <bean id="userService" class="it.com.service.impl.UserServiceImpl" p:userDao-ref="userDao"/>-->
+    <bean id="userDao" class="it.com.dao.impl.UserDaoImpl">
+        <property name="strList">
+            <list>
+                <value>集合</value>
+                <value>集合2</value>
+                <value>集合3</value>
+            </list>
+        </property>
+        <property name="userMap">
+            <map>
+                <entry key="u1" value-ref="user1"></entry>
+                <entry key="u2" value-ref="user2"></entry>
+            </map>
+        </property>
+        <property name="properties">
+            <props>
+                <prop key="ppp1"></prop>
+                <prop key="ppp2"></prop>
+            </props>
+        </property>
+    </bean>
+    <bean id="user1" class="it.com.user.User">
+        <constructor-arg name="name" value="林青霞"></constructor-arg>
+        <constructor-arg name="addr" value="上海"></constructor-arg>
+    </bean>
+    <bean id="user2" class="it.com.user.User">
+        <constructor-arg name="name" value="张国荣"></constructor-arg>
+        <constructor-arg name="addr" value="深圳"></constructor-arg>
+    </bean>
+</beans>
